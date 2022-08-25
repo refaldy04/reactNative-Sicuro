@@ -4,11 +4,11 @@ import {PRIMARY_COLOR, SECONDARY_COLOR, THIRD_COLOR} from './constant';
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: Dimensions.get('screen').height - 70,
+    height: Dimensions.get('screen').height,
     backgroundColor: SECONDARY_COLOR,
   },
   header: {
-    height: Dimensions.get('screen').width / 2,
+    height: Dimensions.get('screen').width / 3,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: SECONDARY_COLOR,
@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    paddingTop: 30,
     alignItems: 'center',
     paddingHorizontal: 20,
   },
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    marginTop: 30,
+    marginTop: 20,
     backgroundColor: PRIMARY_COLOR,
     width: Dimensions.get('screen').width - 80,
     paddingVertical: 10,

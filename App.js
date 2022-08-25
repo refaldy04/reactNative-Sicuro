@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './src/screens/Login';
 import Register from './src/screens/Register';
 import CreatePin from './src/screens/CreatePin';
+import SuccessCreatePin from './src/screens/SuccessCreatePin';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const App = () => {
         />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="CreatePin" component={CreatePin} />
+        <Stack.Screen name="SuccessCreatePin" component={SuccessCreatePin} />
       </Stack.Navigator>
     </NavigationContainer>
   );

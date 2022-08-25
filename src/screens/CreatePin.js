@@ -1,11 +1,20 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import React from 'react';
 import styles from '../styles/global';
 import Brand from '../components/Brand';
-import Input from '../components/Input';
 import {PRIMARY_COLOR} from '../styles/constant';
 
-const Login = () => {
+const CreatePin = ({navigation}) => {
+  const onCreatePin = () => {
+    Alert.alert('Please Wait', 'Redirecting...', [
+      {
+        text: 'OKIEE',
+        onPress: () => {
+          navigation.navigate('SuccessCreatePin');
+        },
+      },
+    ]);
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -14,12 +23,12 @@ const Login = () => {
       <View style={styles.authMain}>
         <Text style={styleLocal.authName}>Create Security PIN</Text>
         <Text style={styleLocal.paragraph}>
-          Create a PIN that’s contain 6 digits number for security purpose in
+          Create a PIN that's contain 6 digits number for security purpose in
           Zwallet.
         </Text>
 
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onCreatePin}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Confirm</Text>
             </View>
@@ -53,4 +62,4 @@ const styleLocal = StyleSheet.create({
   },
 });
 
-export default Login;
+export default CreatePin;
