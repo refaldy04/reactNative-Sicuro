@@ -1,9 +1,10 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
-import Login from './src/screens/Login';
-import Register from './src/screens/Register';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Login from './src/screens/Login';
+import Register from './src/screens/Register';
+import CreatePin from './src/screens/CreatePin';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const App = () => {
           component={Register}
         />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="CreatePin" component={CreatePin} />
       </Stack.Navigator>
     </NavigationContainer>
   );

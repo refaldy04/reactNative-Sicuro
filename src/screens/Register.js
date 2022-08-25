@@ -1,11 +1,21 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import React from 'react';
 import styles from '../styles/global';
 import Brand from '../components/Brand';
 import Input from '../components/Input';
 import {PRIMARY_COLOR} from '../styles/constant';
 
-const Register = () => {
+const Register = ({navigation}) => {
+  const onRegister = () => {
+    Alert.alert('Error', 'Not registered, Redirecting...', [
+      {
+        text: 'OKIEE',
+        onPress: () => {
+          navigation.navigate('Login');
+        },
+      },
+    ]);
+  };
   return (
     <View>
       <View style={styles.wrapper}>
@@ -27,7 +37,7 @@ const Register = () => {
             <Input placeholder="Password" icon="lock" secure={true} />
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onRegister}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>Sign Up</Text>
               </View>

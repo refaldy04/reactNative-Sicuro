@@ -1,11 +1,21 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import React from 'react';
 import styles from '../styles/global';
 import Brand from '../components/Brand';
 import Input from '../components/Input';
 import {PRIMARY_COLOR} from '../styles/constant';
 
-const Login = () => {
+const Login = ({navigation}) => {
+  const onLogin = () => {
+    Alert.alert('Please Wait', 'Redirecting...', [
+      {
+        text: 'OKIEE',
+        onPress: () => {
+          navigation.navigate('CreatePin');
+        },
+      },
+    ]);
+  };
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -24,7 +34,7 @@ const Login = () => {
         </View>
         <Text style={styleLocal.password}>Forgot password?</Text>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onLogin}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Login</Text>
             </View>
