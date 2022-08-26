@@ -34,7 +34,11 @@ const Login = ({navigation}) => {
         <View style={styleLocal.buttonWrapper}>
           <TouchableOpacity onPress={onLogin}>
             <View style={styles.button}>
-              <Text style={styles.buttonText}>Login</Text>
+              <Text
+                style={styles.buttonText}
+                onPress={() => navigation.navigate('ResetPassword')}>
+                Confirm
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -63,7 +67,7 @@ const styleLocal = StyleSheet.create({
   buttonWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 130,
+    marginBottom: 150,
   },
   paragraph: {
     textAlign: 'center',

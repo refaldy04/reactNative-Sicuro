@@ -14,19 +14,21 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen
-    //       options={{headerShown: false}}
-    //       name="Register"
-    //       component={Register}
-    //     />
-    //     <Stack.Screen name="Login" component={Login} />
-    //     <Stack.Screen name="CreatePin" component={CreatePin} />
-    //     <Stack.Screen name="SuccessCreatePin" component={SuccessCreatePin} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-    <Home />
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Register"
+          component={Register}
+        />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
+        <Stack.Screen name="CreatePin" component={CreatePin} />
+        <Stack.Screen name="SuccessCreatePin" component={SuccessCreatePin} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

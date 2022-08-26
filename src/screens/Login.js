@@ -32,7 +32,11 @@ const Login = ({navigation}) => {
         <View>
           <Input placeholder="Password" icon="lock" secure={true} />
         </View>
-        <Text style={styleLocal.password}>Forgot password?</Text>
+        <TouchableOpacity
+          style={styleLocal.password}
+          onPress={() => navigation.navigate('ForgotPassword')}>
+          <Text>Forgot password?</Text>
+        </TouchableOpacity>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity onPress={onLogin}>
             <View style={styles.button}>

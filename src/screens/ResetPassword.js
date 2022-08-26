@@ -11,7 +11,7 @@ const Login = ({navigation}) => {
       {
         text: 'OKIEE',
         onPress: () => {
-          navigation.navigate('CreatePin');
+          navigation.navigate('Login');
         },
       },
     ]);
@@ -66,7 +66,7 @@ const styleLocal = StyleSheet.create({
   buttonWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 130,
+    marginBottom: 170,
   },
   paragraph: {
     textAlign: 'center',
