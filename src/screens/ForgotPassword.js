@@ -34,11 +34,10 @@ const Login = ({navigation}) => {
         <View style={styleLocal.buttonWrapper}>
           <TouchableOpacity onPress={onLogin}>
             <View style={styles.button}>
-              <Text
-                style={styles.buttonText}
+              <TouchableOpacity
                 onPress={() => navigation.navigate('ResetPassword')}>
-                Confirm
-              </Text>
+                <Text style={styles.buttonText}>Confirm</Text>
+              </TouchableOpacity>
             </View>
           </TouchableOpacity>
         </View>
