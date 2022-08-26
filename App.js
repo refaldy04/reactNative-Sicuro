@@ -8,6 +8,7 @@ import CreatePin from './src/screens/CreatePin';
 import SuccessCreatePin from './src/screens/SuccessCreatePin';
 import ForgotPassword from './src/screens/ForgotPassword';
 import ResetPassword from './src/screens/ResetPassword';
+import Home from './src/screens/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +26,7 @@ const App = () => {
     //     <Stack.Screen name="SuccessCreatePin" component={SuccessCreatePin} />
     //   </Stack.Navigator>
     // </NavigationContainer>
-    <ResetPassword />
+    <Home />
   );
 };
 
