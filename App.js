@@ -10,6 +10,8 @@ import ForgotPassword from './src/screens/ForgotPassword';
 import ResetPassword from './src/screens/ResetPassword';
 import Home from './src/screens/Home';
 import Details from './src/screens/Details';
+import History from './src/screens/History';
+import {PRIMARY_COLOR} from './src/styles/constant';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +20,15 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          options={{
+            headerStyle: {
+              backgroundColor: PRIMARY_COLOR,
+            },
+          }}
+          name="History"
+          component={History}
+        />
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen
           options={{headerShown: false}}

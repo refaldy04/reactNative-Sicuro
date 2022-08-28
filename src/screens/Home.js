@@ -29,7 +29,12 @@ const Home = ({navigation}) => {
       </View>
       <View style={styleLocal.transaction}>
         <Text>Transaction History</Text>
-        <Text>See all</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('History');
+          }}>
+          <Text>See all</Text>
+        </TouchableOpacity>
       </View>
       <TouchableOpacity
         style={styleLocal.transactionWrapper}
