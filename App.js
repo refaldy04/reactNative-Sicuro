@@ -14,6 +14,7 @@ import History from './src/screens/History';
 import SearchReceiver from './src/screens/SearchReceiver';
 import {PRIMARY_COLOR} from './src/styles/constant';
 import InputAmount from './src/screens/InputAmount';
+import Confirmation from './src/screens/confirmation';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,16 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{
+            title: 'Confirmation',
+            headerStyle: {
+              backgroundColor: PRIMARY_COLOR,
+            },
+          }}
+          name="Confirmation"
+          component={Confirmation}
+        />
         <Stack.Screen
           options={{
             title: 'Transfer',
