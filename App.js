@@ -11,6 +11,7 @@ import ResetPassword from './src/screens/ResetPassword';
 import Home from './src/screens/Home';
 import Details from './src/screens/Details';
 import History from './src/screens/History';
+import SearchReceiver from './src/screens/SearchReceiver';
 import {PRIMARY_COLOR} from './src/styles/constant';
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,16 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{
+            title: 'Find Receiver',
+            headerStyle: {
+              backgroundColor: PRIMARY_COLOR,
+            },
+          }}
+          name="SearchReceiver"
+          component={SearchReceiver}
+        />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
           options={{
