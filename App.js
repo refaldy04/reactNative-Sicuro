@@ -18,6 +18,7 @@ import Confirmation from './src/screens/Confirmation';
 import PinConfirmation from './src/screens/PinConfirmation';
 import TransferSuccess from './src/screens/TransferSuccess';
 import TransferFailed from './src/screens/TransferFailed';
+import Profile from './src/screens/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Profile"
+          component={Profile}
+        />
         <Stack.Screen
           options={{
             title: 'Transfer Details',
