@@ -19,6 +19,7 @@ import PinConfirmation from './src/screens/PinConfirmation';
 import TransferSuccess from './src/screens/TransferSuccess';
 import TransferFailed from './src/screens/TransferFailed';
 import Profile from './src/screens/Profile';
+import PersonalInfo from './src/screens/PersonalInfo';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,16 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{
+            title: 'Personal Information',
+            headerStyle: {
+              backgroundColor: PRIMARY_COLOR,
+            },
+          }}
+          name="PersonalInfo"
+          component={PersonalInfo}
+        />
         <Stack.Screen
           options={{headerShown: false}}
           name="Profile"
