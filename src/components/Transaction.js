@@ -1,4 +1,11 @@
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import React from 'react';
 import image from '../asset/1.png';
 
@@ -27,11 +34,14 @@ const styleLocal = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginHorizontal: 10,
+    marginVertical: 10,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    minHeight: 125,
+    minWidth: 275,
+    backgroundColor: '#fff',
   },
   user: {
     flexDirection: 'row',
