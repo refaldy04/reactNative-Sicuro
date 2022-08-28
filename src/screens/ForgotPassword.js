@@ -32,13 +32,9 @@ const Login = ({navigation}) => {
           </View>
         </View>
         <View style={styleLocal.buttonWrapper}>
-          <TouchableOpacity onPress={onLogin}>
-            <View style={styles.button}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('ResetPassword')}>
-                <Text style={styles.buttonText}>Confirm</Text>
-              </TouchableOpacity>
-            </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ResetPassword')}>
+            <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </View>
       </View>

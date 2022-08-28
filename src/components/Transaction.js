@@ -1,11 +1,13 @@
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import image from '../asset/1.png';
 
-const Transaction = () => {
+const Transaction = ({navigation}) => {
   return (
     <View>
-      <View style={styleLocal.transactionWrapper}>
+      <TouchableOpacity
+        style={styleLocal.transactionWrapper}
+        onPress={() => navigation.navigate('Details')}>
         <View style={styleLocal.user}>
           <Image source={image} style={{marginRight: 10}} />
           <View>
@@ -14,7 +16,7 @@ const Transaction = () => {
           </View>
         </View>
         <Text style={{fontSize: 20}}>+Rp50.000</Text>
-      </View>
+      </TouchableOpacity>
       <View></View>
     </View>
   );

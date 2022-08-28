@@ -2,9 +2,9 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
-import Transaction from '../components/Transaction';
+import image from '../asset/1.png';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View>
       <View style={styleLocal.headerWrapper}>
@@ -31,7 +31,18 @@ const Home = () => {
         <Text>Transaction History</Text>
         <Text>See all</Text>
       </View>
-      <Transaction />
+      <TouchableOpacity
+        style={styleLocal.transactionWrapper}
+        onPress={() => navigation.navigate('Details')}>
+        <View style={styleLocal.user}>
+          <Image source={image} style={{marginRight: 10}} />
+          <View>
+            <Text>Samuel Suhi</Text>
+            <Text style={{fontSize: 12}}>Transfer</Text>
+          </View>
+        </View>
+        <Text style={{fontSize: 20}}>+Rp50.000</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -76,6 +87,20 @@ const styleLocal = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
+  },
+  transactionWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    minHeight: 125,
+  },
+  user: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
