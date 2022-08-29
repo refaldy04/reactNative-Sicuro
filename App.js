@@ -21,6 +21,7 @@ import TransferFailed from './src/screens/TransferFailed';
 import Profile from './src/screens/Profile';
 import PersonalInfo from './src/screens/PersonalInfo';
 import ChangePassword from './src/screens/ChangePassword';
+import ChangePin from './src/screens/ChangePin';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,16 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{
+            title: 'Change PIN',
+            headerStyle: {
+              backgroundColor: PRIMARY_COLOR,
+            },
+          }}
+          name="ChangePin"
+          component={ChangePin}
+        />
         <Stack.Screen
           options={{
             title: 'Change Password',
