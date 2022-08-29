@@ -19,7 +19,7 @@ const Input = ({
         <Icon name={icon} size={20} color={PRIMARY_COLOR} />
       </View>
       <View style={style.inputWrapper}>
-        <TextInput placeholder={placeholder} />
+        <TextInput placeholder={placeholder} keyboardType={type} />
       </View>
       {secure && (
         <TouchableOpacity onPress={() => setShow(!showText)}>

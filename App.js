@@ -20,6 +20,7 @@ import TransferSuccess from './src/screens/TransferSuccess';
 import TransferFailed from './src/screens/TransferFailed';
 import Profile from './src/screens/Profile';
 import PersonalInfo from './src/screens/PersonalInfo';
+import ChangePassword from './src/screens/ChangePassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,16 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{
+            title: 'Change Password',
+            headerStyle: {
+              backgroundColor: PRIMARY_COLOR,
+            },
+          }}
+          name="ChangePassword"
+          component={ChangePassword}
+        />
         <Stack.Screen
           options={{
             title: 'Personal Information',
