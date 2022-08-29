@@ -23,6 +23,7 @@ import PersonalInfo from './src/screens/PersonalInfo';
 import ChangePassword from './src/screens/ChangePassword';
 import ChangePin from './src/screens/ChangePin';
 import AddPhoneNumber from './src/screens/AddPhoneNumber';
+import ManagePhoneNumber from './src/screens/ManagePhoneNumber';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,16 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{
+            title: 'Manage Phone Number',
+            headerStyle: {
+              backgroundColor: PRIMARY_COLOR,
+            },
+          }}
+          name="ManagePhoneNumber"
+          component={ManagePhoneNumber}
+        />
         <Stack.Screen
           options={{
             title: 'Add Phone Number',
