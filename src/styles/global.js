@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
     backgroundColor: PRIMARY_COLOR,
-    width: Dimensions.get('screen').width - 40,
+    width: Dimensions.get('screen').width - 80,
     paddingVertical: 10,
     alignItems: 'center',
     borderRadius: 20,
