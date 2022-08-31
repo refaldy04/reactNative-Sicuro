@@ -7,7 +7,7 @@ const http = token => {
   }
   return axios.create({
     headers,
-    baseURL: 'http://localhost:3334',
+    baseURL: 'http://192.168.1.9:3334',
   });
 };
 

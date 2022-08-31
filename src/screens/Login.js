@@ -1,20 +1,32 @@
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  TextInput,
+} from 'react-native';
+import React, {useState} from 'react';
 import styles from '../styles/global';
 import Brand from '../components/Brand';
-import Input from '../components/Input';
 import {PRIMARY_COLOR} from '../styles/constant';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {login} from '../redux/asyncActions/auth';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Login = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const data = {
+    email,
+    password,
+  };
+
   const onLogin = () => {
-    Alert.alert('Please Wait', 'Redirecting...', [
-      {
-        text: 'OKIEE',
-        onPress: () => {
-          navigation.navigate('CreatePin');
-        },
-      },
-    ]);
+    dispatch(login(data));
   };
   return (
     <View style={styles.wrapper}>
@@ -26,11 +38,30 @@ const Login = ({navigation}) => {
         <Text style={styleLocal.paragraph}>
           Login to your existing account to access all the features in Zwallet.
         </Text>
-        <View style={styleLocal.inputWrapper}>
-          <Input placeholder="Email" icon="envelope" type="email-address" />
+        <View style={styleLocal.wrapper}>
+          <View style={styleLocal.iconWrapper}>
+            <Icon name="lock" size={20} />
+          </View>
+          <View style={styleLocal.inputWrapper}>
+            <TextInput
+              placeholder="email"
+              keyboardType="email-address"
+              onChangeText={newEmail => setEmail(newEmail)}
+              defaultValue={email}
+            />
+          </View>
         </View>
-        <View>
-          <Input placeholder="Password" icon="lock" secure={true} />
+        <View style={styleLocal.wrapper}>
+          <View style={styleLocal.iconWrapper}>
+            <Icon name="lock" size={20} />
+          </View>
+          <View style={styleLocal.inputWrapper}>
+            <TextInput
+              placeholder="email"
+              onChangeText={newPassword => setPassword(newPassword)}
+              defaultValue={password}
+            />
+          </View>
         </View>
         <TouchableOpacity
           style={styleLocal.password}
@@ -70,8 +101,25 @@ const styleLocal = StyleSheet.create({
     color: PRIMARY_COLOR,
     fontWeight: 'bold',
   },
-  password: {
-    marginTop: 30,
+  password: {},
+  wrapper: {
+    backgroundColor: '#ffffff',
+    elevation: 3,
+    borderRadius: 10,
+    flexDirection: 'row',
+    height: 50,
+    width: 300,
+    marginBottom: 30,
+  },
+  iconWrapper: {
+    height: 50,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputWrapper: {
+    flex: 1,
+    color: 'black',
   },
 });
 

@@ -6,14 +6,18 @@ export const login = createAsyncThunk('auth/login', async request => {
   const result = {};
   try {
     const send = qs.stringify(request);
+    console.log('from auth login', send);
     const {data} = await http().post('/auth/login', send, {
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
       },
     });
-    result.token = data.results.token;
+    console.log('ini data dari backend', data);
+    console.log('ini token', result.token);
+    result.token = data.result.token;
     return result;
   } catch (e) {
+    console.log('gagal bro');
     result.errorMsg = e.response.data.message;
     return result;
   }

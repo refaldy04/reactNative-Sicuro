@@ -16,6 +16,7 @@
     "@react-navigation/native-stack": "^6.8.0",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
     "qs": "^6.11.0",
     "react": "18.0.0",
     "react-native": "0.69.4",
