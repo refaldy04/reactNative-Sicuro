@@ -2,19 +2,34 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
-import image from '../asset/1.png';
+import image from '../asset/user-default.jpg';
+import pic from '../asset/1.png';
+import {useDispatch, useSelector} from 'react-redux';
+import {getProfile} from '../redux/asyncActions/profile';
 
 const Home = ({navigation}) => {
+  const dispatch = useDispatch();
+
+  const token = useSelector(state => state.auth.token);
+  const profile = useSelector(state => state.profile.data);
+
+  React.useEffect(() => {
+    dispatch(getProfile(token));
+    // console.log('ini data profile', profile);
+  }, []);
   return (
     <View>
       <View style={styleLocal.headerWrapper}>
-        <View style={styleLocal.profileWrapper}>
-          <Image source={require('../asset/profile.png')} />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Profile')}
+          style={styleLocal.profileWrapper}>
+          {/* <Image source={require('../asset/profile.png')} /> */}
+          <Image source={profile.picture || image} style={styleLocal.picture} />
           <View style={styleLocal.balance}>
             <Text style={{color: '#fff'}}>Balance</Text>
-            <Text style={styleLocal.money}>Rp120.000</Text>
+            <Text style={styleLocal.money}>Rp{profile.balance}</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <Icon name="bell" size={30} color={'#fff'} />
       </View>
       <View style={styleLocal.buttonWrapper}>
@@ -22,9 +37,11 @@ const Home = ({navigation}) => {
           <Icon name="arrow-up" size={18} style={{marginRight: 15}} />
           <Text style={styleLocal.money}>Transfer</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styleLocal.button}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Topup')}
+          style={styleLocal.button}>
           <Icon name="plus" size={18} style={{marginRight: 15}} />
-          <Text style={styleLocal.money}>Transfer</Text>
+          <Text style={styleLocal.money}>Top Up</Text>
         </TouchableOpacity>
       </View>
       <View style={styleLocal.transaction}>
@@ -40,7 +57,7 @@ const Home = ({navigation}) => {
         style={styleLocal.transactionWrapper}
         onPress={() => navigation.navigate('Details')}>
         <View style={styleLocal.user}>
-          <Image source={image} style={{marginRight: 10}} />
+          <Image source={pic} style={{marginRight: 10}} />
           <View>
             <Text>Samuel Suhi</Text>
             <Text style={{fontSize: 12}}>Transfer</Text>
@@ -66,6 +83,11 @@ const styleLocal = StyleSheet.create({
   },
   profileWrapper: {
     flexDirection: 'row',
+  },
+  picture: {
+    maxWidth: 50,
+    maxHeight: 50,
+    borderRadius: 10,
   },
   balance: {
     marginLeft: 5,

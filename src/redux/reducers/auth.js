@@ -24,11 +24,9 @@ const auth = createSlice({
     build.addCase(login.fulfilled, (state, action) => {
       const token = action.payload?.token;
       if (token) {
-        console.log('hoy');
         state.token = token;
         // localStorage.setItem('token', token);
       } else {
-        console.log('hi');
         state.errorMsg = action.payload?.errorMsg;
         state.successMsg = action.payload?.successMsg;
       }

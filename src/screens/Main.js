@@ -26,6 +26,7 @@ import ChangePin from './ChangePin';
 import AddPhoneNumber from './AddPhoneNumber';
 import ManagePhoneNumber from './ManagePhoneNumber';
 import Notification from './Notification';
+import Topup from './Topup';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,7 @@ const Main = () => {
         {token ? (
           <>
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Topup" component={Topup} />
             <Stack.Screen
               options={{
                 title: 'Notification',

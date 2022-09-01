@@ -1,9 +1,25 @@
-import {View, Text, Image, StyleSheet, Switch} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Switch,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {logout} from '../redux/reducers/auth';
+import {useDispatch} from 'react-redux';
 
 const Profile = () => {
   const [isEnabled, setIsEnabled] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logout());
+  };
+
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
@@ -38,9 +54,9 @@ const Profile = () => {
             value={isEnabled}
           />
         </View>
-        <View style={styleLocal.menuProfile}>
+        <TouchableOpacity onPress={onLogout} style={styleLocal.menuProfile}>
           <Text style={styleLocal.money}>Logout</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
