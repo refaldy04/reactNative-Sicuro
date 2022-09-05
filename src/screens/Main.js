@@ -27,6 +27,7 @@ import AddPhoneNumber from './AddPhoneNumber';
 import ManagePhoneNumber from './ManagePhoneNumber';
 import Notification from './Notification';
 import Topup from './Topup';
+import NewPinInput from './NewPinInput';
 
 const Stack = createNativeStackNavigator();
 
@@ -103,6 +104,16 @@ const Main = () => {
               }}
               name="PersonalInfo"
               component={PersonalInfo}
+            />
+            <Stack.Screen
+              options={{
+                title: 'New Pin Input',
+                headerStyle: {
+                  backgroundColor: PRIMARY_COLOR,
+                },
+              }}
+              name="NewPinInput"
+              component={NewPinInput}
             />
             <Stack.Screen
               options={{headerShown: false}}

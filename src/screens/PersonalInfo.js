@@ -1,11 +1,15 @@
-import {View, Text, Image, StyleSheet, Switch} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Switch,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const PersonalInfo = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
+const PersonalInfo = ({navigation}) => {
   return (
     <View style={styleLocal.profileWrapper}>
       <Text>
@@ -30,7 +34,10 @@ const PersonalInfo = () => {
             <Text>Phone Number</Text>
             <Text style={styleLocal.money}>Notification</Text>
           </View>
-          <Text>Manage</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('AddPhoneNumber')}>
+            <Text>Manage</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

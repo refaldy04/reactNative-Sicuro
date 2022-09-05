@@ -10,7 +10,7 @@ import Input from '../components/Input';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import styles from '../styles/global';
 
-const AddPhoneNumber = () => {
+const AddPhoneNumber = ({navigation}) => {
   return (
     <View style={styleLocal.mainWrapper}>
       <Text style={{fontSize: 17, marginBottom: 40}}>
@@ -21,7 +21,7 @@ const AddPhoneNumber = () => {
         <Input icon="phone" placeholder="Enter your phone number" />
       </View>
       <View style={styles.buttonWrapper}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.pop(1)}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Submit</Text>
           </View>

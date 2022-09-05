@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {logout} from '../redux/reducers/auth';
 import {useDispatch} from 'react-redux';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
 
   const dispatch = useDispatch();
@@ -32,18 +32,24 @@ const Profile = () => {
       <Text style={styleLocal.money}>Robert Chandler</Text>
       <Text>+62 813-9387-7946</Text>
       <View style={styleLocal.menuWrapper}>
-        <View style={styleLocal.menuProfile}>
+        <TouchableOpacity
+          style={styleLocal.menuProfile}
+          onPress={() => navigation.navigate('PersonalInfo')}>
           <Text style={styleLocal.money}>Personal Information</Text>
           <Icon name="arrow-right" size={20} />
-        </View>
-        <View style={styleLocal.menuProfile}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styleLocal.menuProfile}
+          onPress={() => navigation.navigate('ChangePassword')}>
           <Text style={styleLocal.money}>Change Password</Text>
           <Icon name="arrow-right" size={20} />
-        </View>
-        <View style={styleLocal.menuProfile}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styleLocal.menuProfile}
+          onPress={() => navigation.navigate('ChangePin')}>
           <Text style={styleLocal.money}>Change PIN</Text>
           <Icon name="arrow-right" size={20} />
-        </View>
+        </TouchableOpacity>
         <View style={styleLocal.menuProfile}>
           <Text style={styleLocal.money}>Notification</Text>
           <Switch

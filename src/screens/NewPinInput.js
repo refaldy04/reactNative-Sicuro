@@ -14,8 +14,7 @@ const ChangePin = ({navigation}) => {
   return (
     <View style={styleLocal.mainWrapper}>
       <Text style={{fontSize: 17, marginBottom: 40}}>
-        Enter your current 6 digits Zwallet PIN below to continue to the next
-        steps.
+        Type your new 6 digits security PIN to use in Zwallet.
       </Text>
       <View style={styleLocal.pinInput}>
         <TextInput style={styleLocal.input} />
@@ -26,7 +25,7 @@ const ChangePin = ({navigation}) => {
         <TextInput style={styleLocal.input} />
       </View>
       <View style={styles.buttonWrapper}>
-        <TouchableOpacity onPress={() => navigation.navigate('NewPinInput')}>
+        <TouchableOpacity onPress={() => navigation.pop(2)}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Continue</Text>
           </View>

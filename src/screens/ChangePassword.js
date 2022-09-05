@@ -4,7 +4,7 @@ import Input from '../components/Input';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import styles from '../styles/global';
 
-const ChangePassword = () => {
+const ChangePassword = ({navigation}) => {
   return (
     <View style={styleLocal.mainWrapper}>
       <Text style={{fontSize: 17, marginBottom: 40}}>
@@ -36,7 +36,7 @@ const ChangePassword = () => {
         />
       </View>
       <View style={styles.buttonWrapper}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.pop(1)}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Change Password</Text>
           </View>
