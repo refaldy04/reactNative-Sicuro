@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  TextInput,
 } from 'react-native';
 import React from 'react';
 import {PRIMARY_COLOR} from '../styles/constant';
@@ -12,8 +13,9 @@ import Transaction from '../components/Transaction';
 import Input from '../components/Input';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUsers} from '../redux/asyncActions/transfer';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Details = () => {
+const SearchReceiver = ({navigation}) => {
   const dispatch = useDispatch();
   const users = useSelector(state => state.transfer.data);
   const token = useSelector(state => state.auth.token);
@@ -25,8 +27,15 @@ const Details = () => {
   return (
     <View>
       <View style={styleLocal.headerWrapper}>
-        <View style={styleLocal.inputWrapper}>
-          <Input placeholder="Email" icon="search" type="email-address" />
+        <View style={styleLocal.wrapper}>
+          <TouchableOpacity
+            style={styleLocal.iconWrapper}
+            onPress={() => navigation.navigate('InputAmount')}>
+            <Icon name="search" size={20} />
+          </TouchableOpacity>
+          <View style={styleLocal.inputWrapper}>
+            <TextInput placeholder="search users" />
+          </View>
         </View>
       </View>
       <View style={styleLocal.buttonWrapper}>
@@ -123,6 +132,25 @@ const styleLocal = StyleSheet.create({
     paddingLeft: 18,
     paddingTop: 18,
   },
+  wrapper: {
+    backgroundColor: '#ffffff',
+    elevation: 3,
+    borderRadius: 10,
+    flexDirection: 'row',
+    height: 50,
+    width: 300,
+    marginBottom: 30,
+  },
+  iconWrapper: {
+    height: 50,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputWrapper: {
+    flex: 1,
+    color: 'black',
+  },
   diagram: {minHeight: 300},
   transaction: {
     flexDirection: 'row',
@@ -131,4 +159,4 @@ const styleLocal = StyleSheet.create({
   },
 });
 
-export default Details;
+export default SearchReceiver;

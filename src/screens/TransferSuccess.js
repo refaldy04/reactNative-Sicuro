@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import Contact from '../components/Contact';
 
-const TransferSuccess = () => {
+const TransferSuccess = ({navigation}) => {
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
@@ -54,7 +54,9 @@ const TransferSuccess = () => {
           <Text style={styleLocal.money}>To</Text>
         </View>
         <Contact />
-        <TouchableOpacity style={styleLocal.button}>
+        <TouchableOpacity
+          style={styleLocal.button}
+          onPress={() => navigation.pop(6)}>
           <Text style={styleLocal.money}>Back to Home</Text>
         </TouchableOpacity>
       </View>

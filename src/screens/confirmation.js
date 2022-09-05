@@ -12,7 +12,7 @@ import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import Transaction from '../components/Transaction';
 import Input from '../components/Input';
 
-const Confirmation = () => {
+const Confirmation = ({navigation}) => {
   return (
     <View>
       <View style={styleLocal.headerWrapper}>
@@ -45,7 +45,9 @@ const Confirmation = () => {
           <Text>Notes</Text>
           <Text style={styleLocal.money}>For buying some socks</Text>
         </View>
-        <TouchableOpacity style={styleLocal.button}>
+        <TouchableOpacity
+          style={styleLocal.button}
+          onPress={() => navigation.navigate('PinConfirmation')}>
           <Text style={styleLocal.money}>Continue</Text>
         </TouchableOpacity>
       </View>

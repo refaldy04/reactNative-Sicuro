@@ -42,7 +42,7 @@ const styleLocal = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 10,
     borderRadius: 15,
-    minWidth: 275,
+    width: 280,
     backgroundColor: '#fff',
   },
   user: {

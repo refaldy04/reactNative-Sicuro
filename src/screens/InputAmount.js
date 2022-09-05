@@ -11,8 +11,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import Transaction from '../components/Transaction';
 import Input from '../components/Input';
+import styles from '../styles/global';
 
-const InputAmount = () => {
+const InputAmount = ({navigation}) => {
   return (
     <View>
       <View style={styleLocal.headerWrapper}>
@@ -33,6 +34,13 @@ const InputAmount = () => {
             style={styleLocal.inputNotes}
             placeholder="Add some notes"
           />
+        </View>
+        <View style={styles.buttonWrapper}>
+          <TouchableOpacity onPress={() => navigation.navigate('Confirmation')}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Confirm</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -77,6 +85,7 @@ const styleLocal = StyleSheet.create({
     borderBottomWidth: 2,
     width: 200,
     marginleft: 200,
+    marginBottom: 40,
   },
   inputAmount: {
     borderBottomColor: SECONDARY_COLOR,
