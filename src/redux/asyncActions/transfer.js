@@ -1,14 +1,14 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import http from '../../helpers/http';
 
-export const getProfile = createAsyncThunk('profile/getData', async token => {
+export const getUsers = createAsyncThunk('users/getData', async token => {
   const result = {};
   try {
-    console.log('ini dari profile', token);
-    const {data} = await http(token).get('/profile');
+    const {data} = await http(token).get('/allProfile');
+    console.log('ini dari transfer:data', data);
     return data;
   } catch (e) {
-    console.log('ini error dari profile');
+    console.log('ini error dari transfer');
     result.message = e.response.data?.message;
     return result;
   }

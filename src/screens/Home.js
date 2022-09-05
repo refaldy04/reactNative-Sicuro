@@ -11,11 +11,16 @@ const Home = ({navigation}) => {
   const dispatch = useDispatch();
 
   const token = useSelector(state => state.auth.token);
+  const pin = useSelector(state => state.auth.pin);
   const profile = useSelector(state => state.profile.data);
 
   React.useEffect(() => {
-    dispatch(getProfile(token));
-    // console.log('ini data profile', profile);
+    if (pin) {
+      console.log('ini data user');
+      dispatch(getProfile(token));
+    } else {
+      navigation.navigate('CreatePin');
+    }
   }, []);
   return (
     <View>
@@ -23,7 +28,6 @@ const Home = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Profile')}
           style={styleLocal.profileWrapper}>
-          {/* <Image source={require('../asset/profile.png')} /> */}
           <Image source={profile.picture || image} style={styleLocal.picture} />
           <View style={styleLocal.balance}>
             <Text style={{color: '#fff'}}>Balance</Text>
@@ -33,7 +37,9 @@ const Home = ({navigation}) => {
         <Icon name="bell" size={30} color={'#fff'} />
       </View>
       <View style={styleLocal.buttonWrapper}>
-        <TouchableOpacity style={styleLocal.button}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('SearchReceiver')}
+          style={styleLocal.button}>
           <Icon name="arrow-up" size={18} style={{marginRight: 15}} />
           <Text style={styleLocal.money}>Transfer</Text>
         </TouchableOpacity>

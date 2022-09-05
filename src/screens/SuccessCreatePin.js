@@ -4,17 +4,21 @@ import styles from '../styles/global';
 import Brand from '../components/Brand';
 import {PRIMARY_COLOR} from '../styles/constant';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useDispatch, useSelector} from 'react-redux';
 
 const CreatePin = ({navigation}) => {
+  const token = useSelector(state => state.auth.token);
+  const pin = useSelector(state => state.auth.pin);
   const onSuccess = () => {
-    Alert.alert('Please Wait', 'Redirecting...', [
-      {
-        text: 'OKIEE',
-        onPress: () => {
-          navigation.navigate('Home');
-        },
-      },
-    ]);
+    console.log('ini pin saat proses selesai', pin);
+    // Alert.alert('Please Wait', 'Redirecting...', [
+    //   {
+    //     text: 'OKIEE',
+    //     onPress: () => {
+    navigation.navigate('Home');
+    //     },
+    //   },
+    // ]);
   };
   return (
     <View style={styles.wrapper}>
@@ -39,7 +43,7 @@ const CreatePin = ({navigation}) => {
         <View style={styles.buttonWrapper}>
           <TouchableOpacity onPress={onSuccess}>
             <View style={styles.button}>
-              <Text style={styles.buttonText}>Login Now</Text>
+              <Text style={styles.buttonText}>Continue</Text>
             </View>
           </TouchableOpacity>
         </View>

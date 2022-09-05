@@ -38,6 +38,11 @@ const Main = () => {
         {token ? (
           <>
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="CreatePin" component={CreatePin} />
+            <Stack.Screen
+              name="SuccessCreatePin"
+              component={SuccessCreatePin}
+            />
             <Stack.Screen name="Topup" component={Topup} />
             <Stack.Screen
               options={{
@@ -190,11 +195,6 @@ const Main = () => {
             />
             <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
             <Stack.Screen name="ResetPassword" component={ResetPassword} />
-            <Stack.Screen name="CreatePin" component={CreatePin} />
-            <Stack.Screen
-              name="SuccessCreatePin"
-              component={SuccessCreatePin}
-            />
           </>
         )}
       </Stack.Navigator>

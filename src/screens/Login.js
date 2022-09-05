@@ -12,7 +12,7 @@ import Brand from '../components/Brand';
 import {PRIMARY_COLOR} from '../styles/constant';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {login} from '../redux/asyncActions/auth';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');

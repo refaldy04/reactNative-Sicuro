@@ -9,7 +9,10 @@ import {
 import React from 'react';
 import image from '../asset/1.png';
 
-const Transaction = ({navigation}) => {
+const Transaction = ({navigation, fullname}) => {
+  React.useEffect(() => {
+    console.log('ini dari komponen', fullname);
+  });
   return (
     <View>
       <TouchableOpacity
@@ -18,11 +21,11 @@ const Transaction = ({navigation}) => {
         <View style={styleLocal.user}>
           <Image source={image} style={{marginRight: 10}} />
           <View>
-            <Text>Samuel Suhi</Text>
+            <Text>{fullname}</Text>
             <Text style={{fontSize: 12}}>Transfer</Text>
           </View>
         </View>
-        <Text style={{fontSize: 20}}>+Rp50.000</Text>
+        <Text style={{fontSize: 20}}></Text>
       </TouchableOpacity>
       <View></View>
     </View>
@@ -38,8 +41,7 @@ const styleLocal = StyleSheet.create({
     paddingVertical: 10,
     marginHorizontal: 10,
     marginVertical: 10,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    borderRadius: 15,
     minWidth: 275,
     backgroundColor: '#fff',
   },

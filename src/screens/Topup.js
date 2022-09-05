@@ -11,7 +11,7 @@ import styles from '../styles/global';
 import {topup} from '../redux/asyncActions/topup';
 import {useDispatch, useSelector} from 'react-redux';
 
-const InputAmount = () => {
+const InputAmount = ({navigation}) => {
   const [amount, setAmount] = useState();
 
   const dispatch = useDispatch();
@@ -22,6 +22,7 @@ const InputAmount = () => {
 
   const onTopup = () => {
     dispatch(topup({data, token}));
+    navigation.navigate('Home');
   };
   return (
     <View>
