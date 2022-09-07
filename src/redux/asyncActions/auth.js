@@ -30,7 +30,6 @@ export const register = createAsyncThunk('auth/register', async request => {
     const {data} = await http().post('/auth/register', send, {
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
-        Authorization: `Bearer ${Cookie.get('token')}`,
       },
     });
     result.successMsg = data.message;

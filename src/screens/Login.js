@@ -40,7 +40,7 @@ const Login = ({navigation}) => {
         </Text>
         <View style={styleLocal.wrapper}>
           <View style={styleLocal.iconWrapper}>
-            <Icon name="lock" size={20} />
+            <Icon name="envelope" size={20} />
           </View>
           <View style={styleLocal.inputWrapper}>
             <TextInput
@@ -57,7 +57,7 @@ const Login = ({navigation}) => {
           </View>
           <View style={styleLocal.inputWrapper}>
             <TextInput
-              placeholder="email"
+              placeholder="password"
               onChangeText={newPassword => setPassword(newPassword)}
               defaultValue={password}
             />
@@ -75,9 +75,13 @@ const Login = ({navigation}) => {
             </View>
           </TouchableOpacity>
         </View>
-        <Text style={styleLocal.paragraph}>
-          Don't have an account? Let's Sign Up
-        </Text>
+        <TouchableOpacity>
+          <Text
+            style={styleLocal.paragraph}
+            onPress={() => navigation.navigate('Register')}>
+            Don't have an account? Let's Sign Up
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

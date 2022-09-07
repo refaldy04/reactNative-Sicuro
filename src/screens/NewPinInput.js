@@ -6,8 +6,7 @@ import {
   TextInput,
 } from 'react-native';
 import React from 'react';
-import Input from '../components/Input';
-import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
+import {SECONDARY_COLOR} from '../styles/constant';
 import styles from '../styles/global';
 
 const ChangePin = ({navigation}) => {
