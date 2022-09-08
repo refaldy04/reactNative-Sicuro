@@ -6,24 +6,55 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import Transaction from '../components/Transaction';
-import Input from '../components/Input';
 import styles from '../styles/global';
+import {useDispatch, useSelector} from 'react-redux';
+import {getProfileById} from '../redux/asyncActions/profile';
+import {inputAmount} from '../redux/reducers/transfer';
 
 const InputAmount = ({navigation}) => {
+  const [amount, setAmount] = useState('');
+  const [notes, setNotes] = useState('');
+  const recipient_id = useSelector(state => state.transfer.dataTransfer);
+  const recipient = useSelector(state => state.transfer.dataRecipient);
+
+  const today = new Date();
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    console.log('ini dari input amount', recipient_id.recipient_id);
+    dispatch(getProfileById(recipient_id.recipient_id));
+  }, []);
+
+  const data = {
+    amount,
+    notes,
+    time: today,
+  };
+
+  const onInputAmount = () => {
+    dispatch(inputAmount(data));
+    navigation.navigate('Confirmation');
+  };
   return (
     <View>
       <View style={styleLocal.headerWrapper}>
-        <Transaction />
+        <Transaction
+          name={recipient?.fullname}
+          phone={recipient?.phone_number}
+        />
       </View>
       <View style={styleLocal.buttonWrapper}>
         <TextInput
           keyboardType="numeric"
           style={styleLocal.inputAmount}
           placeholder="0.0"
+          onChangeText={newPassword => setAmount(newPassword)}
+          defaultValue={amount}
         />
         <Text style={{marginTop: 30}}>Rp120.000 Available</Text>
       </View>
@@ -33,10 +64,12 @@ const InputAmount = ({navigation}) => {
           <TextInput
             style={styleLocal.inputNotes}
             placeholder="Add some notes"
+            onChangeText={newPassword => setNotes(newPassword)}
+            defaultValue={notes}
           />
         </View>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity onPress={() => navigation.navigate('Confirmation')}>
+          <TouchableOpacity onPress={onInputAmount}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Confirm</Text>
             </View>

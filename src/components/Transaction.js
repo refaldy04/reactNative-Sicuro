@@ -7,11 +7,11 @@ import {
   Dimensions,
 } from 'react-native';
 import React from 'react';
-import image from '../asset/1.png';
+import image from '../asset/user-default.jpg';
 
-const Transaction = ({navigation, fullname}) => {
+const Transaction = ({name}) => {
   React.useEffect(() => {
-    console.log('ini dari komponen', fullname);
+    console.log('ini dari komponen', name);
   });
   return (
     <View>
@@ -19,10 +19,10 @@ const Transaction = ({navigation, fullname}) => {
         style={styleLocal.transactionWrapper}
         onPress={() => navigation.navigate('Details')}>
         <View style={styleLocal.user}>
-          <Image source={image} style={{marginRight: 10}} />
+          <Image source={image} style={styleLocal.picture} />
           <View>
-            <Text>{fullname}</Text>
-            <Text style={{fontSize: 12}}>Transfer</Text>
+            <Text>{name}</Text>
+            <Text style={{fontSize: 12}}>{}</Text>
           </View>
         </View>
         <Text style={{fontSize: 20}}></Text>
@@ -44,6 +44,12 @@ const styleLocal = StyleSheet.create({
     borderRadius: 15,
     width: 280,
     backgroundColor: '#fff',
+  },
+  picture: {
+    maxWidth: 50,
+    maxHeight: 50,
+    borderRadius: 10,
+    marginRight: 20,
   },
   user: {
     flexDirection: 'row',

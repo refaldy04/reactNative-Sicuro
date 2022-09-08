@@ -7,26 +7,28 @@ import {
   Image,
   TextInput,
   SafeAreaView,
-  ScrollView,
 } from 'react-native';
 import React from 'react';
 import {PRIMARY_COLOR} from '../styles/constant';
+import Transaction from '../components/Transaction';
+import Input from '../components/Input';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUsers} from '../redux/asyncActions/transfer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import image from '../asset/user-default.jpg';
+import {selectUser} from '../redux/reducers/transfer';
 
 const SearchReceiver = ({navigation}) => {
   const dispatch = useDispatch();
-  const USERS = useSelector(state => state.transfer.data);
+  const users = useSelector(state => state.transfer.data);
   const token = useSelector(state => state.auth.token);
 
   React.useEffect(() => {
-    console.log('ini data search receiver wkwkwk', USERS);
+    console.log('ini data search receiver wkwkwk', users);
     dispatch(getUsers(token));
   }, []);
   return (
-    <View style={styleLocal.flatlistContainer}>
+    <View>
       <View style={styleLocal.headerWrapper}>
         <View style={styleLocal.wrapper}>
           <TouchableOpacity
@@ -43,23 +45,28 @@ const SearchReceiver = ({navigation}) => {
         <Text style={styleLocal.money}>Contacts</Text>
         <Text>17 Contact Founds</Text>
       </View>
-      <SafeAreaView>
-        <FlatList
-          data={USERS}
-          renderItem={({item}) => (
-            <TouchableOpacity onPress={() => console.log(item.id)}>
-              <View style={styleLocal.transactionWrapper}>
+      <FlatList
+        data={users}
+        renderItem={({item}) => (
+          <>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(selectUser(item.id));
+                navigation.navigate('InputAmount');
+              }}
+              style={styleLocal.transactionWrapper}>
+              <View style={styleLocal.users}>
                 <Image source={image} style={styleLocal.picture} />
                 <View>
-                  <Text>{item?.fullname}</Text>
+                  <Text>{item.fullname}</Text>
                   <Text style={{fontSize: 12}}>lorem20</Text>
                 </View>
               </View>
             </TouchableOpacity>
-          )}
-          keyExtractor={item => item.id}
-        />
-      </SafeAreaView>
+          </>
+        )}
+        keyExtractor={item => item.id}
+      />
     </View>
   );
 };
@@ -67,16 +74,40 @@ const SearchReceiver = ({navigation}) => {
 const styleLocal = StyleSheet.create({
   headerWrapper: {
     backgroundColor: PRIMARY_COLOR,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
+    minHeight: 100,
+  },
+  transactionWrapper: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginHorizontal: 10,
+    marginVertical: 10,
+    borderRadius: 15,
+    backgroundColor: '#fff',
+  },
+  users: {
+    flexDirection: 'row',
+  },
+  detailsWrapper: {
+    flexDirection: 'row',
+  },
+  textWhite: {color: '#fff'},
+  balance: {
+    marginLeft: 5,
   },
   picture: {
     maxWidth: 50,
     maxHeight: 50,
     borderRadius: 10,
-    marginRight: 10,
+    marginRight: 20,
   },
   money: {
     fontSize: 20,
@@ -102,16 +133,15 @@ const styleLocal = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  transactionWrapper: {
+  inputWrapper: {
+    flex: 1,
+    color: 'black',
+  },
+  diagram: {minHeight: 300},
+  transaction: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    marginHorizontal: 20,
-    marginTop: 15,
-    borderRadius: 15,
-    width: 290,
-    backgroundColor: '#fff',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
 });
 

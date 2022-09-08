@@ -28,7 +28,7 @@ const Home = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Profile')}
           style={styleLocal.profileWrapper}>
-          <Image source={profile.picture || image} style={styleLocal.picture} />
+          <Image source={image} style={styleLocal.picture} />
           <View style={styleLocal.balance}>
             <Text style={{color: '#fff'}}>Balance</Text>
             <Text style={styleLocal.money}>Rp{profile.balance}</Text>
