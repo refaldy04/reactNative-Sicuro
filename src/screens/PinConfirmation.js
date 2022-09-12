@@ -1,37 +1,99 @@
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, {useState} from 'react';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
-import Transaction from '../components/Transaction';
-import Input from '../components/Input';
+import {confirmPin} from '../redux/reducers/transfer';
+import {useDispatch, useSelector} from 'react-redux';
+import {transfer} from '../redux/asyncActions/transfer';
 
 const Confirmation = ({navigation}) => {
+  const dataTransfer = useSelector(state => state.transfer.dataTransfer);
+  const pinUser = useSelector(state => state.auth.pin);
+  const token = useSelector(state => state.auth.token);
+  const recipient = useSelector(state => state.transfer.dataRecipient);
+  const [first, setFirst] = useState();
+  const [sec, setSec] = useState();
+  const [third, setThird] = useState();
+  const [fourth, setFourth] = useState();
+  const [fifth, setFifth] = useState();
+  const [sixth, setSixth] = useState();
+
+  const dispatch = useDispatch();
+
+  const data = {
+    first,
+    sec,
+    third,
+    fourth,
+    fifth,
+    sixth,
+  };
+  const pin = Object.values(data).join('');
+
   return (
     <View>
       <View style={styleLocal.buttonWrapper}>
         <Text style={styleLocal.money}>Enter PIN to Transfer</Text>
         <Text style={{textAlign: 'center', marginVertical: 30}}>
           Enter your 6 digits PIN for confirmation to continue transferring
-          money.{' '}
+          money.
         </Text>
         <View style={styleLocal.pinInput}>
-          <TextInput style={styleLocal.input} />
-          <TextInput style={styleLocal.input} />
-          <TextInput style={styleLocal.input} />
-          <TextInput style={styleLocal.input} />
-          <TextInput style={styleLocal.input} />
-          <TextInput style={styleLocal.input} />
+          <TextInput
+            style={styleLocal.input}
+            onChangeText={newPassword => setFirst(newPassword)}
+            defaultValue={first}
+          />
+          <TextInput
+            style={styleLocal.input}
+            onChangeText={newPassword => setSec(newPassword)}
+            defaultValue={sec}
+          />
+          <TextInput
+            style={styleLocal.input}
+            onChangeText={newPassword => setThird(newPassword)}
+            defaultValue={third}
+          />
+          <TextInput
+            style={styleLocal.input}
+            onChangeText={newPassword => setFourth(newPassword)}
+            defaultValue={fourth}
+          />
+          <TextInput
+            style={styleLocal.input}
+            onChangeText={newPassword => setFifth(newPassword)}
+            defaultValue={fifth}
+          />
+          <TextInput
+            style={styleLocal.input}
+            onChangeText={newPassword => setSixth(newPassword)}
+            defaultValue={sixth}
+          />
         </View>
         <TouchableOpacity
           style={styleLocal.button}
-          onPress={() => navigation.navigate('TransferSuccess')}>
+          onPress={() => {
+            if (pin != pinUser) {
+              navigation.navigate('TransferFailed');
+            } else {
+              console.log('wkwkwkwkwkwk', recipient);
+              const data = {
+                amount: dataTransfer.amount,
+                recipient_id: recipient.user_id,
+                notes: dataTransfer.notes,
+                time: dataTransfer.time,
+                type_id: 1,
+                pin: pin,
+              };
+              dispatch(transfer({data, token}));
+              navigation.navigate('TransferSuccess');
+            }
+          }}>
           <Text style={styleLocal.money}>Continue</Text>
         </TouchableOpacity>
       </View>

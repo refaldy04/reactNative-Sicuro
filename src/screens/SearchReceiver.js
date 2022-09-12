@@ -25,7 +25,7 @@ const SearchReceiver = ({navigation}) => {
 
   React.useEffect(() => {
     console.log('ini data search receiver wkwkwk', users);
-    dispatch(getUsers(token));
+    const data = dispatch(getUsers(token));
   }, []);
   return (
     <View>
@@ -48,7 +48,7 @@ const SearchReceiver = ({navigation}) => {
       <FlatList
         data={users}
         renderItem={({item}) => (
-          <>
+          <View>
             <TouchableOpacity
               onPress={() => {
                 dispatch(selectUser(item.id));
@@ -63,7 +63,7 @@ const SearchReceiver = ({navigation}) => {
                 </View>
               </View>
             </TouchableOpacity>
-          </>
+          </View>
         )}
         keyExtractor={item => item.id}
       />
@@ -84,12 +84,10 @@ const styleLocal = StyleSheet.create({
     minHeight: 100,
   },
   transactionWrapper: {
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
     paddingHorizontal: 10,
     paddingVertical: 10,
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginVertical: 8,
     borderRadius: 15,
     backgroundColor: '#fff',
   },
@@ -137,7 +135,6 @@ const styleLocal = StyleSheet.create({
     flex: 1,
     color: 'black',
   },
-  diagram: {minHeight: 300},
   transaction: {
     flexDirection: 'row',
     justifyContent: 'space-between',

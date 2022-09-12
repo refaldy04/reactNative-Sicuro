@@ -16,7 +16,7 @@ const Home = ({navigation}) => {
 
   React.useEffect(() => {
     if (pin) {
-      console.log('ini data user');
+      console.log('ini data user', profile);
       dispatch(getProfile(token));
     } else {
       navigation.navigate('CreatePin');

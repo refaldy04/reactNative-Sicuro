@@ -9,8 +9,25 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import Contact from '../components/Contact';
+import {useDispatch, useSelector} from 'react-redux';
 
 const TransferSuccess = ({navigation}) => {
+  const dataTransfer = useSelector(state => state.transfer.dataTransfer);
+  const profile = useSelector(state => state.profile.data);
+  const recipient = useSelector(state => state.transfer.dataRecipient);
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  today = mm + '/' + dd + '/' + yyyy;
+
+  var d = new Date();
+  const time = d.getHours() + '.' + d.getMinutes();
+
+  React.useEffect(() => {
+    console.log('ini data profile', recipient);
+  }, []);
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
@@ -24,36 +41,36 @@ const TransferSuccess = ({navigation}) => {
           <View style={styleLocal.rowCard}>
             <View style={styleLocal.card}>
               <Text>Amount</Text>
-              <Text style={styleLocal.money}>Rp100.000</Text>
+              <Text style={styleLocal.money}>Rp{dataTransfer.amount}</Text>
             </View>
             <View style={styleLocal.card}>
               <Text>Balance Left</Text>
-              <Text style={styleLocal.money}>Rp20.000</Text>
+              <Text style={styleLocal.money}>Rp{profile.balance}</Text>
             </View>
           </View>
           <View style={styleLocal.rowCard}>
             <View style={styleLocal.card}>
               <Text>Date</Text>
-              <Text style={styleLocal.money}>May 11, 2020</Text>
+              <Text style={styleLocal.money}>{today}</Text>
             </View>
             <View style={styleLocal.card}>
               <Text>Time</Text>
-              <Text style={styleLocal.money}>12.20</Text>
+              <Text style={styleLocal.money}>{time}</Text>
             </View>
           </View>
         </View>
         <View style={styleLocal.bigCard}>
           <Text>Notes</Text>
-          <Text style={styleLocal.money}>For buying some socks</Text>
+          <Text style={styleLocal.money}>{dataTransfer.notes}</Text>
         </View>
         <View style={{justifyContent: 'flex-start', width: 280, marginTop: 20}}>
           <Text style={styleLocal.money}>From</Text>
         </View>
-        <Contact />
+        <Contact name={profile.fullname || 'name not yet set'} />
         <View style={{justifyContent: 'flex-start', width: 280, marginTop: 20}}>
           <Text style={styleLocal.money}>To</Text>
         </View>
-        <Contact />
+        <Contact name={recipient.fullname} />
         <TouchableOpacity
           style={styleLocal.button}
           onPress={() => navigation.pop(6)}>

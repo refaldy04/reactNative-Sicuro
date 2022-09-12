@@ -1,49 +1,60 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import Transaction from '../components/Transaction';
-import Input from '../components/Input';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Confirmation = ({navigation}) => {
+  const recipient = useSelector(state => state.transfer.dataRecipient);
+  const dataTransfer = useSelector(state => state.transfer.dataTransfer);
+  const profile = useSelector(state => state.profile.data);
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  today = mm + '/' + dd + '/' + yyyy;
+
+  var d = new Date();
+
+  const time = d.getHours() + '.' + d.getMinutes();
+
+  React.useEffect(() => {
+    console.log('ini data profile', time);
+  }, []);
   return (
     <View>
       <View style={styleLocal.headerWrapper}>
-        <Transaction />
+        <Transaction name={recipient.fullname} />
       </View>
       <View style={styleLocal.buttonWrapper}>
         <View>
           <View style={styleLocal.rowCard}>
             <View style={styleLocal.card}>
               <Text>Amount</Text>
-              <Text style={styleLocal.money}>Rp100.000</Text>
+              <Text style={styleLocal.money}>Rp{dataTransfer.amount}</Text>
             </View>
             <View style={styleLocal.card}>
               <Text>Balance Left</Text>
-              <Text style={styleLocal.money}>Rp20.000</Text>
+              <Text style={styleLocal.money}>
+                Rp{profile.balance - dataTransfer.amount}
+              </Text>
             </View>
           </View>
           <View style={styleLocal.rowCard}>
             <View style={styleLocal.card}>
               <Text>Date</Text>
-              <Text style={styleLocal.money}>May 11, 2020</Text>
+              <Text style={styleLocal.money}>{today}</Text>
             </View>
             <View style={styleLocal.card}>
               <Text>Time</Text>
-              <Text style={styleLocal.money}>12.20</Text>
+              <Text style={styleLocal.money}>{time}</Text>
             </View>
           </View>
         </View>
         <View style={styleLocal.bigCard}>
           <Text>Notes</Text>
-          <Text style={styleLocal.money}>For buying some socks</Text>
+          <Text style={styleLocal.money}>{dataTransfer.notes}</Text>
         </View>
         <TouchableOpacity
           style={styleLocal.button}
