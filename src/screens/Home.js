@@ -5,7 +5,7 @@ import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import image from '../asset/user-default.jpg';
 import pic from '../asset/1.png';
 import {useDispatch, useSelector} from 'react-redux';
-import {getProfile} from '../redux/asyncActions/profile';
+import {getProfile, historyTransaction} from '../redux/asyncActions/profile';
 
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
@@ -13,11 +13,13 @@ const Home = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
   const pin = useSelector(state => state.auth.pin);
   const profile = useSelector(state => state.profile.data);
+  const data = useSelector(state => state.profile.historyTransaction);
 
   React.useEffect(() => {
     if (pin) {
       console.log('ini data user', profile);
       dispatch(getProfile(token));
+      dispatch(historyTransaction({token, limit: 4}));
     } else {
       navigation.navigate('CreatePin');
     }
@@ -31,7 +33,7 @@ const Home = ({navigation}) => {
           <Image source={image} style={styleLocal.picture} />
           <View style={styleLocal.balance}>
             <Text style={{color: '#fff'}}>Balance</Text>
-            <Text style={styleLocal.money}>Rp{profile.balance}</Text>
+            <Text style={styleLocal.money}>Rp{profile?.balance}</Text>
           </View>
         </TouchableOpacity>
         <Icon name="bell" size={30} color={'#fff'} />

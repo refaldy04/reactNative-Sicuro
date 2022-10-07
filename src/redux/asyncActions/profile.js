@@ -33,3 +33,24 @@ export const getProfileById = createAsyncThunk(
     }
   },
 );
+
+export const historyTransaction = createAsyncThunk(
+  'profile/getHistoryTransaction',
+  async request => {
+    const result = {};
+    try {
+      console.log('ini dari profile', request);
+      const {data} = await http(request.token).get(
+        `/historyTransaction?limit=${request.limit || 5}&page=${
+          request.page || 1
+        }`,
+      );
+      console.log('ini data history', data);
+      return data;
+    } catch (e) {
+      console.log('ini error dari profile');
+      result.message = e.response.data?.message;
+      return result;
+    }
+  },
+);

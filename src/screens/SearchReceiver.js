@@ -28,7 +28,7 @@ const SearchReceiver = ({navigation}) => {
     const data = dispatch(getUsers(token));
   }, []);
   return (
-    <View>
+    <>
       <View style={styleLocal.headerWrapper}>
         <View style={styleLocal.wrapper}>
           <TouchableOpacity
@@ -45,29 +45,29 @@ const SearchReceiver = ({navigation}) => {
         <Text style={styleLocal.money}>Contacts</Text>
         <Text>17 Contact Founds</Text>
       </View>
+
       <FlatList
         data={users}
         renderItem={({item}) => (
-          <View>
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(selectUser(item.id));
-                navigation.navigate('InputAmount');
-              }}
-              style={styleLocal.transactionWrapper}>
-              <View style={styleLocal.users}>
-                <Image source={image} style={styleLocal.picture} />
-                <View>
-                  <Text>{item.fullname}</Text>
-                  <Text style={{fontSize: 12}}>lorem20</Text>
-                </View>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(selectUser(item.id));
+              navigation.navigate('InputAmount');
+              // console.log(item.id);
+            }}
+            style={styleLocal.transactionWrapper}>
+            <View style={styleLocal.users}>
+              <Image source={image} style={styleLocal.picture} />
+              <View>
+                <Text>{item.fullname}</Text>
+                <Text style={{fontSize: 12}}>lorem20</Text>
               </View>
-            </TouchableOpacity>
-          </View>
+            </View>
+          </TouchableOpacity>
         )}
         keyExtractor={item => item.id}
       />
-    </View>
+    </>
   );
 };
 

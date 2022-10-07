@@ -1,10 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getProfile} from '../asyncActions/profile';
+import {getProfile, historyTransaction} from '../asyncActions/profile';
 import {topup} from '../asyncActions/topup';
 import {transfer} from '../asyncActions/transfer';
 
 const initialState = {
   data: {},
+  historyTransaction: [],
+  historyPageInfo: {},
 };
 
 const profile = createSlice({
@@ -22,7 +24,12 @@ const profile = createSlice({
     });
     build.addCase(transfer.fulfilled, (state, action) => {
       console.log('ini dari reducers', action.payload[0].balance);
-      state.data.balance = action.payload[0].balance;
+      state.data.balance = action.payload[0]?.balance;
+    });
+    build.addCase(historyTransaction.fulfilled, (state, action) => {
+      console.log('ini dari reducers detelah get history data', action.payload);
+      state.historyTransaction = action.payload?.result;
+      state.historyPageInfo = action.payload?.pageInfo;
     });
   },
 });
