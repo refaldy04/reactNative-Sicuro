@@ -4,6 +4,8 @@ import {getProfileById} from '../asyncActions/profile';
 
 const initialState = {
   data: {},
+  users: [],
+  usersPageInfo: {},
   dataTransfer: {},
   dataRecipient: {},
 };
@@ -32,7 +34,16 @@ const transfer = createSlice({
   },
   extraReducers: build => {
     build.addCase(getUsers.fulfilled, (state, action) => {
-      state.data = action.payload.result;
+      console.log(
+        'ini users dari profile reducers hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh',
+        action.payload,
+      );
+      const users = action.payload?.result;
+      const pageInfo = action.payload?.pageInfo;
+      if (users) {
+        state.users = users;
+        state.usersPageInfo = pageInfo;
+      }
     });
     build.addCase(getProfileById.fulfilled, (state, action) => {
       state.dataRecipient = action.payload.result;

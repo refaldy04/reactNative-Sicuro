@@ -6,7 +6,7 @@ import {
   FlatList,
   Image,
   TextInput,
-  SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import {PRIMARY_COLOR} from '../styles/constant';
@@ -20,12 +20,18 @@ import {selectUser} from '../redux/reducers/transfer';
 
 const SearchReceiver = ({navigation}) => {
   const dispatch = useDispatch();
-  const users = useSelector(state => state.transfer.data);
+  // const users = useSelector(state => state.transfer.data);
+  const profileData = useSelector(state => state.transfer.users);
+  const pageInfo = useSelector(state => state.transfer.usersPageInfo);
   const token = useSelector(state => state.auth.token);
 
+  const data = {
+    token,
+  };
+
   React.useEffect(() => {
-    console.log('ini data search receiver wkwkwk', users);
-    const data = dispatch(getUsers(token));
+    console.log('ini data search receiver wkwkwk', profileData);
+    dispatch(getUsers(data));
   }, []);
   return (
     <>
@@ -46,8 +52,30 @@ const SearchReceiver = ({navigation}) => {
         <Text>17 Contact Founds</Text>
       </View>
 
+      <View style={styleLocal.pagination}>
+        <TouchableOpacity
+          style={styleLocal.button}
+          disabled={pageInfo.prevPage === null}
+          onPress={() =>
+            dispatch(getUsers({token, page: pageInfo.currentPage - 1}))
+          }>
+          <Text>Prev</Text>
+        </TouchableOpacity>
+
+        <Text>{pageInfo.currentPage}</Text>
+
+        <TouchableOpacity
+          style={styleLocal.button}
+          disabled={pageInfo.nextPage === null}
+          onPress={() =>
+            dispatch(getUsers({token, page: pageInfo.currentPage + 1}))
+          }>
+          <Text>Next</Text>
+        </TouchableOpacity>
+      </View>
+
       <FlatList
-        data={users}
+        data={profileData}
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => {
@@ -94,6 +122,11 @@ const styleLocal = StyleSheet.create({
   users: {
     flexDirection: 'row',
   },
+  button: {
+    backgroundColor: PRIMARY_COLOR,
+    padding: 6,
+    borderRadius: 6,
+  },
   detailsWrapper: {
     flexDirection: 'row',
   },
@@ -115,6 +148,12 @@ const styleLocal = StyleSheet.create({
   buttonWrapper: {
     paddingLeft: 18,
     paddingTop: 18,
+  },
+  pagination: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginVertical: 20,
   },
   wrapper: {
     backgroundColor: '#ffffff',

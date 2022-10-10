@@ -54,3 +54,23 @@ export const historyTransaction = createAsyncThunk(
     }
   },
 );
+
+export const getAllProfile = createAsyncThunk(
+  'profile/getAllData',
+  async send => {
+    const result = {};
+    try {
+      console.log(send);
+      const {data} = await http(send.token).get(
+        `/allProfile?search=${send.search || ''}&limit=${
+          send.limit || 5
+        }&page=${send.page || 1}&sort=${send.sort || 0}`,
+      );
+      return data;
+    } catch (e) {
+      result.message = e.response.data?.message;
+      console.log('ini result getAllProfile kalo error', result);
+      return result;
+    }
+  },
+);

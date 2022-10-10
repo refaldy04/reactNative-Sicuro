@@ -2,11 +2,19 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import http from '../../helpers/http';
 import qs from 'qs';
 
-export const getUsers = createAsyncThunk('users/getData', async token => {
+export const getUsers = createAsyncThunk('users/getData', async send => {
   const result = {};
+
   try {
-    const {data} = await http(token).get('/allProfile');
-    console.log('ini dari transfer:data', data);
+    console.log(
+      'ini sebndddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
+      send,
+    );
+    const {data} = await http(send.token).get(
+      `/allProfile?search=${send.search || ''}&limit=${send.limit || 5}&page=${
+        send.page || 1
+      }&sort=${send.sort || 0}`,
+    );
     return data;
   } catch (e) {
     console.log('ini error dari transfer');
