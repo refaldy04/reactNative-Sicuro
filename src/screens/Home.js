@@ -11,7 +11,6 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import image from '../asset/user-default.jpg';
-import pic from '../asset/1.png';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProfile, historyTransaction} from '../redux/asyncActions/profile';
 
@@ -25,7 +24,7 @@ const Home = ({navigation}) => {
 
   React.useEffect(() => {
     if (pin) {
-      console.log('ini data user', profile);
+      console.log('ini data user', profile.picture);
       dispatch(getProfile(token));
       dispatch(historyTransaction({token, limit: 4}));
     } else {

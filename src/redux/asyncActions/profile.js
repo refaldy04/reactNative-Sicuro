@@ -5,8 +5,6 @@ import http from '../../helpers/http';
 export const getProfile = createAsyncThunk('profile/getData', async token => {
   const result = {};
   try {
-    console.log('ini dari profile', token);
-
     const {data} = await http(token).get('/profile');
     return data;
   } catch (e) {
@@ -21,7 +19,6 @@ export const getProfileById = createAsyncThunk(
   async request => {
     const result = {};
     try {
-      const send = qs.stringify(request);
       console.log('ini dari profile', request);
       const {data} = await http().get(`/admin/profile/${request}`);
       console.log('ini data', data);

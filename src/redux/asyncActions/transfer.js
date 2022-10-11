@@ -6,10 +6,6 @@ export const getUsers = createAsyncThunk('users/getData', async send => {
   const result = {};
 
   try {
-    console.log(
-      'ini sebndddddddddddddddddddddddddddddddddddddddddddddddddddddddd',
-      send,
-    );
     const {data} = await http(send.token).get(
       `/allProfile?search=${send.search || ''}&limit=${send.limit || 5}&page=${
         send.page || 1

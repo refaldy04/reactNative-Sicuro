@@ -9,28 +9,40 @@ import {
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {logout} from '../redux/reducers/auth';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import image from '../asset/user-default.jpg';
 
 const Profile = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
+  const profile = useSelector(state => state.profile.data);
 
   const dispatch = useDispatch();
 
   const onLogout = () => {
-    dispatch(logout());
+    console.log(profile.picture);
+    // dispatch(logout());
   };
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
     <View style={styleLocal.profileWrapper}>
-      <Image source={require('../asset/profile.png')} />
+      <Image
+        source={
+          profile.picture
+            ? {
+                uri: `https://res.cloudinary.com/dwxrkcas3/image/upload/${profile.picture}`,
+              }
+            : image
+        }
+        style={styleLocal.picture}
+      />
       <View style={styleLocal.editWrapper}>
         <Icon name="pencil" style={{marginRight: 8}} />
         <Text>Edit</Text>
       </View>
-      <Text style={styleLocal.money}>Robert Chandler</Text>
-      <Text>+62 813-9387-7946</Text>
+      <Text style={styleLocal.money}>{profile.fullname}</Text>
+      <Text>{profile.phone_number || 'phone number not set'}</Text>
       <View style={styleLocal.menuWrapper}>
         <TouchableOpacity
           style={styleLocal.menuProfile}
@@ -77,7 +89,13 @@ const styleLocal = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
-    marginBottom: 30,
+    marginBottom: 20,
+  },
+  picture: {
+    width: 70,
+    height: 70,
+    borderRadius: 10,
+    marginTop: 40,
   },
   money: {
     fontSize: 20,
