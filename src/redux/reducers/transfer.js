@@ -34,10 +34,6 @@ const transfer = createSlice({
   },
   extraReducers: build => {
     build.addCase(getUsers.fulfilled, (state, action) => {
-      console.log(
-        'ini users dari profile reducers hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh',
-        action.payload,
-      );
       const users = action.payload?.result;
       const pageInfo = action.payload?.pageInfo;
       if (users) {

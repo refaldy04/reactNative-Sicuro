@@ -1,4 +1,12 @@
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
@@ -25,7 +33,7 @@ const Home = ({navigation}) => {
     }
   }, []);
   return (
-    <View>
+    <>
       <View style={styleLocal.headerWrapper}>
         <TouchableOpacity
           onPress={() => navigation.navigate('Profile')}
@@ -61,19 +69,37 @@ const Home = ({navigation}) => {
           <Text>See all</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={styleLocal.transactionWrapper}
-        onPress={() => navigation.navigate('Details')}>
-        <View style={styleLocal.user}>
-          <Image source={pic} style={{marginRight: 10}} />
-          <View>
-            <Text>Samuel Suhi</Text>
-            <Text style={{fontSize: 12}}>Transfer</Text>
-          </View>
+
+      {data ? (
+        <FlatList
+          data={data}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={styleLocal.transactionWrapper}
+              onPress={() => navigation.navigate('Details')}>
+              <View style={styleLocal.user}>
+                <Image source={image} style={styleLocal.picture} />
+                <View>
+                  <Text>{item.fullname}</Text>
+                  <Text style={{fontSize: 12}}>Transfer</Text>
+                </View>
+              </View>
+              <Text style={{fontSize: 20}}>Rp.{item.amount}</Text>
+            </TouchableOpacity>
+          )}
+          keyExtractor={item => item.id}
+        />
+      ) : (
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 50,
+          }}>
+          <Text>data not found</Text>
         </View>
-        <Text style={{fontSize: 20}}>+Rp50.000</Text>
-      </TouchableOpacity>
-    </View>
+      )}
+    </>
   );
 };
 
@@ -96,6 +122,7 @@ const styleLocal = StyleSheet.create({
     maxWidth: 50,
     maxHeight: 50,
     borderRadius: 10,
+    marginRight: 8,
   },
   balance: {
     marginLeft: 5,
@@ -122,16 +149,17 @@ const styleLocal = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
+    marginBottom: 10,
   },
   transactionWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingVertical: 10,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
-    minHeight: 125,
+    // minHeight: 125,
   },
   user: {
     flexDirection: 'row',

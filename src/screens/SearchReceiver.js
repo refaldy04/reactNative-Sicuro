@@ -82,8 +82,6 @@ const SearchReceiver = ({navigation}) => {
             backgroundColor: SECONDARY_COLOR,
           }}
           onValueChange={(itemValue, itemIndex) => {
-            // setSelectedValue(itemValue)
-            console.log(itemValue);
             dispatch(getUsers({token, sort: itemValue}));
           }}>
           <Picker.Item label="sort" />
