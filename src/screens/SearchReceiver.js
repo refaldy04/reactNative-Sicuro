@@ -8,12 +8,13 @@ import {
   TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
-import {PRIMARY_COLOR} from '../styles/constant';
+import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUsers} from '../redux/asyncActions/transfer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import image from '../asset/user-default.jpg';
 import {selectUser} from '../redux/reducers/transfer';
+import {Picker} from '@react-native-picker/picker';
 
 const SearchReceiver = ({navigation}) => {
   const [keyword, setKeyword] = useState('');
@@ -74,6 +75,21 @@ const SearchReceiver = ({navigation}) => {
           }>
           <Text style={styleLocal.textWhite}>Next</Text>
         </TouchableOpacity>
+        <Picker
+          selectedValue={null}
+          style={{
+            width: 140,
+            backgroundColor: SECONDARY_COLOR,
+          }}
+          onValueChange={(itemValue, itemIndex) => {
+            // setSelectedValue(itemValue)
+            console.log(itemValue);
+            dispatch(getUsers({token, sort: itemValue}));
+          }}>
+          <Picker.Item label="sort" />
+          <Picker.Item label="ASC" value="0" />
+          <Picker.Item label="DESC" value="1" />
+        </Picker>
       </View>
 
       <FlatList
