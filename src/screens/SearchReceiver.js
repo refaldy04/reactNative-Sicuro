@@ -6,12 +6,9 @@ import {
   FlatList,
   Image,
   TextInput,
-  ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {PRIMARY_COLOR} from '../styles/constant';
-import Transaction from '../components/Transaction';
-import Input from '../components/Input';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUsers} from '../redux/asyncActions/transfer';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,8 +16,8 @@ import image from '../asset/user-default.jpg';
 import {selectUser} from '../redux/reducers/transfer';
 
 const SearchReceiver = ({navigation}) => {
+  const [keyword, setKeyword] = useState('');
   const dispatch = useDispatch();
-  // const users = useSelector(state => state.transfer.data);
   const profileData = useSelector(state => state.transfer.users);
   const pageInfo = useSelector(state => state.transfer.usersPageInfo);
   const token = useSelector(state => state.auth.token);
@@ -33,17 +30,22 @@ const SearchReceiver = ({navigation}) => {
     console.log('ini data search receiver wkwkwk', profileData);
     dispatch(getUsers(data));
   }, []);
+
   return (
     <>
       <View style={styleLocal.headerWrapper}>
         <View style={styleLocal.wrapper}>
           <TouchableOpacity
             style={styleLocal.iconWrapper}
-            onPress={() => navigation.navigate('InputAmount')}>
+            onPress={() => dispatch(getUsers({token, search: keyword}))}>
             <Icon name="search" size={20} />
           </TouchableOpacity>
           <View style={styleLocal.inputWrapper}>
-            <TextInput placeholder="search users" />
+            <TextInput
+              placeholder="search users"
+              onChangeText={value => setKeyword(value)}
+              defaultValue={keyword}
+            />
           </View>
         </View>
       </View>
@@ -59,7 +61,7 @@ const SearchReceiver = ({navigation}) => {
           onPress={() =>
             dispatch(getUsers({token, page: pageInfo.currentPage - 1}))
           }>
-          <Text>Prev</Text>
+          <Text style={styleLocal.textWhite}>Prev</Text>
         </TouchableOpacity>
 
         <Text>{pageInfo.currentPage}</Text>
@@ -70,7 +72,7 @@ const SearchReceiver = ({navigation}) => {
           onPress={() =>
             dispatch(getUsers({token, page: pageInfo.currentPage + 1}))
           }>
-          <Text>Next</Text>
+          <Text style={styleLocal.textWhite}>Next</Text>
         </TouchableOpacity>
       </View>
 
