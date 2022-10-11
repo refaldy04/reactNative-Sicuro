@@ -1,5 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getProfile, historyTransaction} from '../asyncActions/profile';
+import {
+  getProfile,
+  historyTransaction,
+  editPicture,
+} from '../asyncActions/profile';
 import {topup} from '../asyncActions/topup';
 import {transfer} from '../asyncActions/transfer';
 
@@ -30,6 +34,10 @@ const profile = createSlice({
       console.log('ini dari reducers detelah get history data', action.payload);
       state.historyTransaction = action.payload?.result;
       state.historyPageInfo = action.payload?.pageInfo;
+    });
+    build.addCase(editPicture.fulfilled, (state, action) => {
+      console.log('ini dari reducers detelah edit data', action.payload.result);
+      state.data = action.payload.result[0];
     });
   },
 });

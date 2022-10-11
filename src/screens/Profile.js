@@ -5,43 +5,78 @@ import {
   StyleSheet,
   Switch,
   TouchableOpacity,
+  Pressable,
+  Modal,
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {logout} from '../redux/reducers/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import image from '../asset/user-default.jpg';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {editPicture} from '../redux/asyncActions/profile';
 
 const Profile = ({navigation}) => {
+  const [picture, setPicture] = useState(null);
+  const [uploading, setUpload] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
+
   const profile = useSelector(state => state.profile.data);
+  const token = useSelector(state => state.auth.token);
 
   const dispatch = useDispatch();
 
   const onLogout = () => {
-    console.log(profile.picture);
-    // dispatch(logout());
+    dispatch(logout());
+  };
+
+  const picImage = async () => {
+    const pict = await launchImageLibrary();
+    if (pict.assets) {
+      setUpload(true);
+      setPicture(pict.assets[0].uri);
+      dispatch(
+        editPicture({
+          token,
+          picture: pict.assets[0],
+          cb: () => {
+            setUpload(false);
+          },
+        }),
+      );
+    }
   };
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
     <View style={styleLocal.profileWrapper}>
-      <Image
-        source={
-          profile.picture
-            ? {
-                uri: `https://res.cloudinary.com/dwxrkcas3/image/upload/${profile.picture}`,
-              }
-            : image
-        }
-        style={styleLocal.picture}
-      />
-      <View style={styleLocal.editWrapper}>
+      <View style={styleLocal.picture}>
+        <Image
+          resizeMode="cover"
+          source={
+            profile.picture
+              ? {
+                  uri: `https://res.cloudinary.com/dwxrkcas3/image/upload/${profile.picture}`,
+                }
+              : image
+          }
+          style={styleLocal.profilePict}
+        />
+        {uploading && (
+          <View style={styleLocal.upload}>
+            <Text style={{color: 'white'}}>Loading...</Text>
+          </View>
+        )}
+      </View>
+
+      <Pressable onPress={picImage} style={styleLocal.editWrapper}>
         <Icon name="pencil" style={{marginRight: 8}} />
         <Text>Edit</Text>
-      </View>
-      <Text style={styleLocal.money}>{profile.fullname}</Text>
+      </Pressable>
+      <Text style={styleLocal.money}>
+        {profile.fullname || 'fullname not set'}
+      </Text>
       <Text>{profile.phone_number || 'phone number not set'}</Text>
       <View style={styleLocal.menuWrapper}>
         <TouchableOpacity
@@ -97,6 +132,20 @@ const styleLocal = StyleSheet.create({
     borderRadius: 10,
     marginTop: 40,
   },
+  profilePict: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+  },
+  upload: {
+    width: 70,
+    height: 70,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    borderRadius: 10,
+  },
   money: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -113,6 +162,44 @@ const styleLocal = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
 

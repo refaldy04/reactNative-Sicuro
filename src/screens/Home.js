@@ -24,7 +24,6 @@ const Home = ({navigation}) => {
 
   React.useEffect(() => {
     if (pin) {
-      console.log('ini data user', profile.picture);
       dispatch(getProfile(token));
       dispatch(historyTransaction({token, limit: 4}));
     } else {
@@ -37,7 +36,16 @@ const Home = ({navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Profile')}
           style={styleLocal.profileWrapper}>
-          <Image source={image} style={styleLocal.picture} />
+          <Image
+            source={
+              profile.picture
+                ? {
+                    uri: `https://res.cloudinary.com/dwxrkcas3/image/upload/${profile.picture}`,
+                  }
+                : image
+            }
+            style={styleLocal.picture}
+          />
           <View style={styleLocal.balance}>
             <Text style={{color: '#fff'}}>Balance</Text>
             <Text style={styleLocal.money}>Rp{profile?.balance}</Text>
@@ -118,8 +126,8 @@ const styleLocal = StyleSheet.create({
     flexDirection: 'row',
   },
   picture: {
-    maxWidth: 50,
-    maxHeight: 50,
+    width: 50,
+    height: 50,
     borderRadius: 10,
     marginRight: 8,
   },
