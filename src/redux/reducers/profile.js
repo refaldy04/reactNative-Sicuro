@@ -11,6 +11,7 @@ const initialState = {
   data: {},
   historyTransaction: [],
   historyPageInfo: {},
+  errMsg: null,
 };
 
 const profile = createSlice({
@@ -37,7 +38,11 @@ const profile = createSlice({
     });
     build.addCase(editPicture.fulfilled, (state, action) => {
       console.log('ini dari reducers detelah edit data', action.payload.result);
-      state.data = action.payload.result[0];
+      if (action.payload.result) {
+        state.data = action.payload.result[0];
+      } else {
+        state.err = action.payload;
+      }
     });
   },
 });

@@ -96,9 +96,9 @@ export const editPicture = createAsyncThunk(
       console.log('ini data', data);
       return data;
     } catch (e) {
-      console.log('ini error dari profile');
-      result.message = e.response.data?.message;
-      return result;
+      console.log('ini error dari profile', e);
+      request.cb();
+      return e.response.data?.message;
     }
   },
 );

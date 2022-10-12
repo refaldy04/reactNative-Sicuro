@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
   Modal,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,11 +16,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import image from '../asset/user-default.jpg';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {editPicture} from '../redux/asyncActions/profile';
+import {PRIMARY_COLOR, SECONDARY_COLOR} from '../styles/constant';
 
 const Profile = ({navigation}) => {
-  const [picture, setPicture] = useState(null);
   const [uploading, setUpload] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const profile = useSelector(state => state.profile.data);
   const token = useSelector(state => state.auth.token);
@@ -30,17 +32,20 @@ const Profile = ({navigation}) => {
     dispatch(logout());
   };
 
-  const picImage = async () => {
-    const pict = await launchImageLibrary();
+  const picImage = async type => {
+    const pict = type ? await launchCamera() : await launchImageLibrary();
+    console.log(pict.assets[0]);
+    // setUpload(false);
+    // setModalVisible(!modalVisible);
     if (pict.assets) {
       setUpload(true);
-      setPicture(pict.assets[0].uri);
       dispatch(
         editPicture({
           token,
           picture: pict.assets[0],
           cb: () => {
             setUpload(false);
+            setModalVisible(!modalVisible);
           },
         }),
       );
@@ -69,8 +74,32 @@ const Profile = ({navigation}) => {
           </View>
         )}
       </View>
-
-      <Pressable onPress={picImage} style={styleLocal.editWrapper}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styleLocal.centeredView}>
+          <View style={styleLocal.modalView}>
+            {uploading && <Text style={{marginBottom: 20}}>Loading...</Text>}
+            <Pressable
+              style={[styleLocal.button, styleLocal.buttonClose]}
+              onPress={() => picImage(false)}>
+              <Text style={styleLocal.textStyle}>Select from galery</Text>
+            </Pressable>
+            <Pressable
+              style={[styleLocal.button, styleLocal.buttonClose]}
+              onPress={() => picImage(true)}>
+              <Text style={styleLocal.textStyle}>Open camera</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable
+        onPress={() => setModalVisible(true)}
+        style={styleLocal.editWrapper}>
         <Icon name="pencil" style={{marginRight: 8}} />
         <Text>Edit</Text>
       </Pressable>
@@ -190,7 +219,8 @@ const styleLocal = StyleSheet.create({
     elevation: 2,
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: SECONDARY_COLOR,
+    marginBottom: 10,
   },
   textStyle: {
     color: 'white',
