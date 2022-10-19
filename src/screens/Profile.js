@@ -33,7 +33,9 @@ const Profile = ({navigation}) => {
   };
 
   const picImage = async type => {
-    const pict = type ? await launchCamera() : await launchImageLibrary();
+    const pict = type
+      ? await launchCamera({maxWidth: 200, maxHeight: 200})
+      : await launchImageLibrary();
     console.log(pict.assets[0]);
     // setUpload(false);
     // setModalVisible(!modalVisible);
