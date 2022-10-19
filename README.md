@@ -18,4 +18,4 @@ Mobile app for manage money
 
 visit this link and install app-release.apk in your android device https://github.com/refaldy04/reactNative-Sicuro/releases/tag/E-Wallet <br/>
 make sure to turn off dark mode in your device <br/>
-login with email hello@mail.com and password 12345678
+login with email hello@mail.com - password 12345678 - pin 111111
