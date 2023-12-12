@@ -19,12 +19,9 @@ export const getProfileById = createAsyncThunk(
   async request => {
     const result = {};
     try {
-      console.log('ini dari profile', request);
       const {data} = await http().get(`/admin/profile/${request}`);
-      console.log('ini data', data);
       return data;
     } catch (e) {
-      console.log('ini error dari profile');
       result.message = e.response.data?.message;
       return result;
     }
@@ -36,16 +33,14 @@ export const historyTransaction = createAsyncThunk(
   async request => {
     const result = {};
     try {
-      console.log('ini dari profile', request);
       const {data} = await http(request.token).get(
         `/historyTransaction?limit=${request.limit || 5}&page=${
           request.page || 1
         }`,
       );
-      console.log('ini data history', data);
       return data;
     } catch (e) {
-      console.log('ini error dari profile');
+      console.log('ini error dari profile', e);
       result.message = e.response.data?.message;
       return result;
     }
@@ -57,7 +52,6 @@ export const getAllProfile = createAsyncThunk(
   async send => {
     const result = {};
     try {
-      console.log(send);
       const {data} = await http(send.token).get(
         `/allProfile?search=${send.search || ''}&limit=${
           send.limit || 5
@@ -77,10 +71,6 @@ export const editPicture = createAsyncThunk(
   async request => {
     const result = {};
     try {
-      console.log(
-        'tesssssssssssssssssssssssssssssssssssssssssssss',
-        request.picture,
-      );
       var formData = new FormData();
       formData.append('picture', {
         uri: request.picture.uri,
@@ -93,7 +83,6 @@ export const editPicture = createAsyncThunk(
         },
       });
       request.cb();
-      console.log('ini data', data);
       return data;
     } catch (e) {
       console.log('ini error dari profile', e);

@@ -13,7 +13,7 @@ export const getUsers = createAsyncThunk('users/getData', async send => {
     );
     return data;
   } catch (e) {
-    console.log('ini error dari transfer');
+    console.log('ini error dari transfer', e);
     result.message = e.response.data?.message;
     return result;
   }
@@ -24,14 +24,12 @@ export const transfer = createAsyncThunk(
   async request => {
     const result = {};
     try {
-      console.log('ini dari asyncAction', request);
       const send = qs.stringify(request.data);
       const {data} = await http(request.token).post('/transfer', send, {
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
         },
       });
-      console.log('ini dari asyncActions transfer', data.result[0]);
       return data.result;
     } catch (e) {
       console.log('ini error dari async transfer', e);

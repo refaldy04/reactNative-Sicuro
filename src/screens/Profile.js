@@ -36,7 +36,6 @@ const Profile = ({navigation}) => {
     const pict = type
       ? await launchCamera({maxWidth: 200, maxHeight: 200})
       : await launchImageLibrary();
-    console.log(pict.assets[0]);
     // setUpload(false);
     // setModalVisible(!modalVisible);
     if (pict.assets) {

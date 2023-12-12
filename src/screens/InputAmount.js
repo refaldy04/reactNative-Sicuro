@@ -26,7 +26,6 @@ const InputAmount = ({navigation}) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log('ini dari input amount', recipient);
     dispatch(getProfileById(recipient_id.recipient_id));
   }, []);
 

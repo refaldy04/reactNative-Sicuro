@@ -10,7 +10,6 @@ const CreatePin = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
   const pin = useSelector(state => state.auth.pin);
   const onSuccess = () => {
-    console.log('ini pin saat proses selesai', pin);
     // Alert.alert('Please Wait', 'Redirecting...', [
     //   {
     //     text: 'OKIEE',

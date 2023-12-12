@@ -28,7 +28,6 @@ const SearchReceiver = ({navigation}) => {
   };
 
   React.useEffect(() => {
-    console.log('ini data search receiver wkwkwk', profileData);
     dispatch(getUsers(data));
   }, []);
 
@@ -97,7 +96,6 @@ const SearchReceiver = ({navigation}) => {
             onPress={() => {
               dispatch(selectUser(item.id));
               navigation.navigate('InputAmount');
-              // console.log(item.id);
             }}
             style={styleLocal.transactionWrapper}>
             <View style={styleLocal.users}>

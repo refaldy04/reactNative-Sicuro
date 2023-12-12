@@ -11,7 +11,6 @@ export const topup = createAsyncThunk('transaction/topup', async request => {
         'content-type': 'application/x-www-form-urlencoded',
       },
     });
-    console.log('ini dari asyncActions', data.result);
     result.balance = data.result[0].balance;
     return result;
   } catch (e) {

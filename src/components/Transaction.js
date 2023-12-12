@@ -10,9 +10,6 @@ import React from 'react';
 import image from '../asset/user-default.jpg';
 
 const Transaction = ({name}) => {
-  React.useEffect(() => {
-    console.log('ini dari komponen', name);
-  });
   return (
     <View>
       <TouchableOpacity

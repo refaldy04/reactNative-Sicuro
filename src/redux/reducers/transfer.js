@@ -15,21 +15,15 @@ const transfer = createSlice({
   initialState,
   reducers: {
     selectUser: (state, action) => {
-      console.log('ini action payload transfer', action.payload);
       state.dataTransfer.recipient_id = action.payload;
-      console.log('ini dari reducers transfer', state.dataTransfer);
     },
     inputAmount: (state, action) => {
-      console.log(action.payload);
       state.dataTransfer.amount = action.payload.amount;
       state.dataTransfer.notes = action.payload.notes;
       state.dataTransfer.time = action.payload.time;
-      console.log('ini dari reducers transfer', state.dataTransfer);
     },
     confirmPin: (state, action) => {
-      console.log('ini data repicient', action);
       state.dataTransfer.pin = action.payload;
-      console.log('ini dari reducers transfer', state.dataTransfer);
     },
   },
   extraReducers: build => {
@@ -43,7 +37,6 @@ const transfer = createSlice({
     });
     build.addCase(getProfileById.fulfilled, (state, action) => {
       state.dataRecipient = action.payload.result;
-      console.log('ini data repicient', state.dataRecipient);
     });
   },
 });

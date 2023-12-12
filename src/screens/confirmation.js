@@ -19,9 +19,6 @@ const Confirmation = ({navigation}) => {
 
   const time = d.getHours() + '.' + d.getMinutes();
 
-  React.useEffect(() => {
-    console.log('ini data profile', time);
-  }, []);
   return (
     <View>
       <View style={styleLocal.headerWrapper}>

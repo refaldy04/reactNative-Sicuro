@@ -45,7 +45,6 @@ const auth = createSlice({
       state.successMsg = action.payload?.successMsg;
     });
     build.addCase(createPin.fulfilled, (state, action) => {
-      console.log('ini dari reducer auth', action.payload);
       state.pin = action.payload?.result;
     });
   },

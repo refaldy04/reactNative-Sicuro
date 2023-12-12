@@ -29,7 +29,6 @@ const Register = ({navigation}) => {
   };
 
   const onRegister = () => {
-    console.log(data);
     dispatch(register(data));
     navigation.navigate('Login');
     // Alert.alert('Error', 'Not registered, Redirecting...', [

@@ -25,9 +25,6 @@ const TransferSuccess = ({navigation}) => {
   var d = new Date();
   const time = d.getHours() + '.' + d.getMinutes();
 
-  React.useEffect(() => {
-    console.log('ini data profile', recipient);
-  }, []);
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>

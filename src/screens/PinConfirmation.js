@@ -81,7 +81,6 @@ const Confirmation = ({navigation}) => {
             if (pin != pinUser) {
               navigation.navigate('TransferFailed');
             } else {
-              console.log('wkwkwkwkwkwk', recipient);
               const data = {
                 amount: dataTransfer.amount,
                 recipient_id: recipient.user_id,
